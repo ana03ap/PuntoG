@@ -4,6 +4,7 @@ import 'package:f_project_1/presentation/controllers/connectivity_controller.dar
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:loggy/loggy.dart';
+import 'dart:convert';
 
 import '../../domain/repositories/i_event_repository.dart';
 import '../../domain/usecases/join_event.dart';
@@ -38,8 +39,7 @@ class EventController extends GetxController {
         _unjoinEventUseCase = unjoinEventUseCase,
         _filterEventsUseCase = filterEventsUseCase,
         _checkVersionUseCase = checkVersionUseCase,
-         _addCommentUseCase   = addCommentUseCase;
-        
+        _addCommentUseCase = addCommentUseCase;
 
   @override
   void onInit() {
@@ -70,6 +70,9 @@ class EventController extends GetxController {
       }
 
       final events = await _repository.getAllEvents();
+
+      // final rawJson = jsonEncode(events);
+      // logInfo('📥 Todos los eventos cargados: $rawJson');
       filteredEvents.value = events.cast<EventModel>();
       updateJoinedEvents();
     } catch (e) {
@@ -135,6 +138,10 @@ class EventController extends GetxController {
   void filterEvents(String type) {
     selectedFilter.value = type;
     updateFilteredEvents();
+    // 3️⃣ Ver cómo quedó la lista filtrada
+    // (suponiendo que filteredEvents es tu RxList<EventModel>)
+    final titles = filteredEvents.map((e) => e.title).toList();
+    logInfo('✔️ Eventos tras filtrar ($type): $titles');
   }
 
   void resetFilter() {

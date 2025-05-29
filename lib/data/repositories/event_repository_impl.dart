@@ -17,48 +17,6 @@ class EventRepositoryImpl implements IEventRepository {
     required this.networkInfo,
   });
 
-//   @override
-//   Future<List<Event>> getAllEvents() async {
-//     List<Event> events = [];
-
-//     if (await networkInfo.isConnected()) {
-//       logInfo('📡 Conectado a internet');
-//       try {
-//         // 1) Comparo versiones
-//         final remoteVersion = await remoteDataSource.fetchEventVersion();
-//         final localVersion = await localDataSource.getLocalVersion();
-
-//         if (remoteVersion > localVersion) {
-//           logInfo('Nueva versión detectada, descargando eventos...');
-//           final apiEvents = await remoteDataSource.fetchEvents(); //traer la api
-
-// // 3) Merge: conservo isJoined local
-//           final savedEvents = await localDataSource.getSavedEvents();
-//           final joinMap = {for (var e in savedEvents) e.id: e.isJoined.value};
-//           for (var ev in apiEvents) {
-//             ev.isJoined.value = joinMap[ev.id] ?? false;
-//           }
-
-//           await localDataSource.saveEvents(apiEvents.cast<EventModel>());
-//           await localDataSource.setLocalVersion(remoteVersion);
-//           logInfo('Nueva versión descargada: ${apiEvents.length}');
-//           events = apiEvents;
-
-//         } else {
-//           logInfo('Mismo número de versión, se usa Hive');
-//           events = await localDataSource.getSavedEvents();
-//         }
-//       } catch (e) {
-//         logError('Error al descargar desde API: $e');
-//         events = await localDataSource.getSavedEvents();
-//       }
-//     } else {
-//       logInfo('Sin internet: usando Hive');
-//       events = await localDataSource.getSavedEvents();
-//     }
-
-//     return events;
-//   }
 
 @override
 Future<List<Event>> getAllEvents() async {

@@ -141,8 +141,8 @@ class Startpage extends StatelessWidget {
                   // LISTA DE EVENTOS
                   Expanded(
                     child: Obx(() {
-                      final events = eventController.upcomingEvents;
-
+                      // final events = eventController.upcomingEvents;
+                      final events = eventController.filteredEvents;
                       if (events.isEmpty) {
                         return const Center(child: Text("No events found"));
                       }
