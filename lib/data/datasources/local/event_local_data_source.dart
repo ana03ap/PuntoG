@@ -21,7 +21,12 @@ class EventLocalDataSource implements IEventLocalDataSource {
   @override
   Future<List<EventModel>> getSavedEvents() async {
     final box = Hive.box<EventHiveModel>(_boxName);
-    return box.values.map((e) => EventModel.fromHive(e)).toList();
+    
+    final events = box.values.map((e) => EventModel.fromHive(e)).toList();
+    // for (var e in events) {
+    //   logInfo('🔍 Evento guardado → id: ${e.id}, title: ${e.title}');
+    // }
+    return events;
   }
 
   @override
