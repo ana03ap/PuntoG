@@ -81,6 +81,10 @@ class EventModel extends Event {
   }
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
+       // Prefija la ruta del asset directamente al crear el modelo
+     final String rawPath = json['path'] ?? '';
+    final String fullPath = 'lib/assets/$rawPath';
+
     return EventModel(
       id: json['_id'] ?? '',
       title: json['title'] ?? '',
@@ -90,7 +94,7 @@ class EventModel extends Event {
       availableSpots: json['availableSpots'] ??
           0, // <- int plano, se convierte en constructor
       date: json['date'] ?? '',
-      path: json['path'] ?? '',
+      path: fullPath,
       type: json['type'] ?? '',
       isJoined: (json['isJoined'] as bool?) ?? false,
       ratings: (json['ratings'] != null)
@@ -101,4 +105,7 @@ class EventModel extends Event {
       comments: (json['comments'] ?? []).cast<String>(),
     );
   }
+
+
+  
 }
