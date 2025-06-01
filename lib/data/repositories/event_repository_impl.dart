@@ -60,7 +60,7 @@ Future<List<Event>> getAllEvents() async {
       events = await localDataSource.getSavedEvents();
     }
   } else {
-    logInfo('🚫 Sin internet, usando datos de Hive');
+    logInfo('Sin internet, usando datos de Hive');
     events = await localDataSource.getSavedEvents();
   }
 

@@ -23,9 +23,6 @@ class EventLocalDataSource implements IEventLocalDataSource {
     final box = Hive.box<EventHiveModel>(_boxName);
     
     final events = box.values.map((e) => EventModel.fromHive(e)).toList();
-    // for (var e in events) {
-    //   logInfo('🔍 Evento guardado → id: ${e.id}, title: ${e.title}');
-    // }
     return events;
   }
 

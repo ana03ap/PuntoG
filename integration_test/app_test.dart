@@ -25,6 +25,7 @@ import 'package:f_project_1/domain/datasources/i_event_remote_data_source.dart';
 import 'package:f_project_1/domain/datasources/i_version_remote_data_source.dart';
 
 // Implementación de un fake remoto para pruebas de integración sin usar la red real.
+/*
 class FakeRemoteDataSource
     implements IEventRemoteDataSource, IVersionRemoteDataSource {
   // Lista de eventos simulados
@@ -235,3 +236,4 @@ void main() {
     await Hive.close();
   });
 }
+*/

@@ -79,33 +79,35 @@ class EventModel extends Event {
       comments: comments,
     );
   }
-
-  factory EventModel.fromJson(Map<String, dynamic> json) {
-       // Prefija la ruta del asset directamente al crear el modelo
-     final String rawPath = json['path'] ?? '';
-    final String fullPath = 'lib/assets/$rawPath';
-
-    return EventModel(
-      id: json['_id'] ?? '',
-      title: json['title'] ?? '',
-      location: json['location'] ?? '',
-      details: json['details'] ?? '',
-      participants: json['participants'] ?? 0,
-      availableSpots: json['availableSpots'] ??
-          0, // <- int plano, se convierte en constructor
-      date: json['date'] ?? '',
-      path: fullPath,
-      type: json['type'] ?? '',
-      isJoined: (json['isJoined'] as bool?) ?? false,
-      ratings: (json['ratings'] != null)
-          ? List<double>.from(
-              (json['ratings'] as List).map((e) => (e as num).toDouble()))
-          : [],
-
-      comments: (json['comments'] ?? []).cast<String>(),
-    );
+factory EventModel.fromJson(Map<String, dynamic> json) {
+  final String rawPath = json['path'] ?? '';
+  String cleanedPath = rawPath;
+  // Elimina todos los "lib/" del inicio
+  while (cleanedPath.startsWith('lib/')) {
+    cleanedPath = cleanedPath.substring('lib/'.length);
   }
+  final String fullPath = cleanedPath.startsWith('assets/')
+      ? cleanedPath
+      : 'lib/assets/$cleanedPath';
 
+  print('EventModel.fromJson: rawPath=$rawPath, cleanedPath=$cleanedPath, fullPath=$fullPath');
 
-  
+  return EventModel(
+    id: json['_id'] ?? '',
+    title: json['title'] ?? '',
+    location: json['location'] ?? '',
+    details: json['details'] ?? '',
+    participants: json['participants'] ?? 0,
+    availableSpots: json['availableSpots'] ?? 0,
+    date: json['date'] ?? '',
+    path: fullPath,
+    type: json['type'] ?? '',
+    isJoined: (json['isJoined'] as bool?) ?? false,
+    ratings: (json['ratings'] != null)
+        ? List<double>.from(
+            (json['ratings'] as List).map((e) => (e as num).toDouble()))
+        : [],
+    comments: (json['comments'] ?? []).cast<String>(),
+  );
+}
 }
