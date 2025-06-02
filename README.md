@@ -43,6 +43,7 @@
 ### Learn how our app works! 🎥 https://www.youtube.com/shorts/dniOyBbtZEk
 ### Widget and Integration Testing ☑️ https://youtu.be/LZjIn6D4eE8?si=MUXkVi-YnfLNFc17
 #### How the flutter app knows when theres has been an update on the backend and triggers the update? 🔗https://youtu.be/QZDc3_tft-A?si=YzIC9Og2_OzuTN9w
+#### Observe the functionality of both apps  🎆 https://youtu.be/fFWO2N6fPK8
 
 
 
